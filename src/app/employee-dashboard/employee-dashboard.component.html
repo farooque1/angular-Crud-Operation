@@ -1,0 +1,102 @@
+
+<nav class="navbar navbar bg-primary">
+    <div class="container-fluid">
+      <div class="navbar-header">
+          <h1 style="color:aliceblue;margin-top:10px;">Angular CRUD Operation</h1>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><button (click)="clickaddemployee()" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"> Add employee</button></li>
+        
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container ">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+          <th>Edit</th>
+          <th>Delete</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr *ngFor="let row of employeeData">
+                <th>{{row.id}}</th>
+                <th>{{row.firstname}}</th>
+                <th>{{row.lastname}}</th>
+                <th>{{row.email}} </th>
+          <td><button type="button" (click)="onEdit(row)" class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button></td>
+          <td><button type="button" (click)="deleteEmployee(row)" class="btn btn-danger">Delete</button></td>
+        <td><button type="button" class="btn btn-primary">Enable</button>
+            <button type="button" class="btn btn-warning">Disable</button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+
+  <!-- Trigger the modal with a button -->
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formvalue">
+            <div class="form-group">
+              <label for="firstname">First Name:</label>
+              <input type="text" formControlName="firstname" class="form-control" id="firstname">
+            </div>
+            <div class="form-group">
+              <label for="lastname">Last Name:</label>
+              <input type="text" formControlName="lastname" class="form-control" id="lastname">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" formControlName="email" class="form-control" id="email">
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" *ngIf="showadd" (click)="postEmployeeDetails()" class="btn btn-success" data-dismiss="modal">Add</button>
+
+        <button  type="button" *ngIf="showupdate" (click)="updateEmployeeDetails()" class="btn btn-success" data-dismiss="modal">Update</button>
+        
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Are You Sure To Delete The Record
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button"  class="btn btn-primary">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
